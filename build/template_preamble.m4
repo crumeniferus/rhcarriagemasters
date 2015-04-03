@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Roly's Gypsy Caravan Holidays</title>
+		<title>m4_sinclude(`site_title.txt')</title>
 		<link rel="stylesheet" href="css/main.css" type="text/css" />
 		m4_sinclude(crum4_createpagename`_stylesheet.m4')
 

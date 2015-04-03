@@ -2,6 +2,7 @@
 #Macro needs to.
 
 #Start by always building everything.
+#We could do with a script that automatically calculates dependencies from the macro files: there are quite a few nested macro calls.
 
 #GnuWin32PATH=C:\Users\ian\GnuWin32\bin
 
@@ -29,6 +30,6 @@ site : $(PAGE_DEFS) $(PAGE_FILES)
 
 $(PAGE_FILES) : %.html : $(wildcard %_*.m4) $(PAGE_TEMPLATES) $(CRUMENIFERUS_DEFS) pages.m4
 	@echo Making $@ for the $(page_name) page.
-	m4 --prefix-builtins --define=crum4_pagelist="$(PAGE_ARRAY)" --define=crum4_createpagename=$(page_name) --define=crum4_createpagefile=$@ pages.m4 > $@
+	m4 --debug=V --prefix-builtins --define=crum4_pagelist="$(PAGE_ARRAY)" --define=crum4_createpagename=$(page_name) --define=crum4_createpagefile=$@ pages.m4 > $@
 
 *.m4 :
