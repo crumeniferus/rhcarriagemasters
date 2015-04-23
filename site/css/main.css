@@ -10,8 +10,6 @@
 /* Imports */
 @import url("reset.css");
 @import url("global-forms.css");
-@import url("http://fonts.googleapis.com/css?family=Tangerine");
-@import url("http://fonts.googleapis.com/css?family=Artifika");
 
 /***** Global *****/
 /* Body */
@@ -20,8 +18,8 @@
 		background-attachment: fixed;
 		background-position: top center;
 		color: #000305;
-		font-size: 100%; /* Base font size: 14px */
-		font-family: 'Artifika', 'PT Sans', 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+		font-size: 87.5%; /* Base font size: 14px */
+		font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 		line-height: 1.429;
 		margin: 0;
 		padding: 0;
@@ -29,20 +27,17 @@
 	}
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
-	font-family: Tangerine; # Theming: Header font.
+h2 {font-size: 1.571em}	/* 22px */
+h3 {font-size: 1.429em}	/* 20px */
+h4 {font-size: 1.286em}	/* 18px */
+h5 {font-size: 1.143em}	/* 16px */
+h6 {font-size: 1em}		/* 14px */
+
+h2, h3, h4, h5, h6 {
 	font-weight: 400;
 	line-height: 1.1;
 	margin-bottom: .8em;
 }
-
-/* These will have to be tweaked to account for the different visual weights of different fonts. */
-h1 {font-size: 500%}	/* 22px */
-h2 {font-size: 300%}	/* 22px */
-h3 {font-size: 250%}	/* 20px */
-h4 {font-size: 200%}	/* 18px */
-h5 {font-size: 150%}	/* 16px */
-h6 {font-size: 100%}	/* 14px */
 	
 /* Anchors */
 a {outline: 0;}
@@ -128,8 +123,7 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 }
 
 	/* Banner */
-	/* #banner h1 {font-size: 3.571em; line-height: 1;}*/
-	#banner h1 {line-height: 1;}
+	#banner h1 {font-size: 3.571em; line-height: 1;}
 	#banner h1 a:link, #banner h1 a:visited {
 		color: rgba(0,3,5,.8);
 		display: block;
@@ -137,7 +131,7 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 		margin: 0 0 .6em .2em;
 		text-decoration: none;
 		text-shadow: 1px 1px 3px #ffffff;
-		width: 527px;
+		width: 427px;
 	}
 	#banner h1 a:hover, #banner h1 a:active {
 		background: none;
@@ -149,9 +143,8 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 	
 	/* Main Nav */
 	#banner nav {
-		font-family: Tangerine;
 		background: rgba(0,3,5,.8);
-		font-size: 2.449em;
+		font-size: 1.143em;
 		height: 40px;
 		line-height: 30px;
 		margin: 0 auto 2em auto;
@@ -217,9 +210,8 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 }
 #featured figure img {display: block; float: right;}
 
-/* Some of these smaller font sizes need a little extra space when using a very cursive font; the ascenders and descenders start to look a bit spidery. */
-#featured h2 {color: #C74451; font-size: 2.236em; margin-bottom: 0.333em;}
-#featured h3 {font-size: 1.714em; letter-spacing: 0.05em; word-spacing: 0.125em; margin-bottom: .5em;}
+#featured h2 {color: #C74451; font-size: 1.714em; margin-bottom: 0.333em;}
+#featured h3 {font-size: 1.429em; margin-bottom: .5em;}
 
 #featured h3 a:link, #featured h3 a:visited {color: #000305; text-decoration: none;}
 #featured h3 a:hover, #featured h3 a:active {color: #fff;}
@@ -260,7 +252,7 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 #extras li {border-bottom: 1px solid #fff;}
 #extras h2 {
 	color: #C74350;
-	font-size: 2.236em;
+	font-size: 1.429em;
 	margin-bottom: .25em;
 	padding: 0 3px;
 }
@@ -361,7 +353,7 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 li:last-child .hentry, #content > .hentry {border: 0; margin: 0;}
 #content > .hentry {padding: 1em 0;}
 
-.entry-title {font-size: 2.236em; margin-bottom: 0;}
+.entry-title {font-size: 1.429em; margin-bottom: 0;}
 .entry-title a:link, .entry-title a:visited {text-decoration: none;}
 
 .hentry .post-info * {font-style: normal;}
