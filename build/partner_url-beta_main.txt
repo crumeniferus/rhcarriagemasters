@@ -1,1 +1,1 @@
-partner_url-beta_rhfs.txt
+partner_url-beta_ofah.txt
