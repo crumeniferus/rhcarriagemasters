@@ -2,7 +2,7 @@
 #
 # Usage:
 #   make [<size_name>]
-# where size_name is one of thumbs, article, medium, large, slideshow or all. 
+# where size_name is one of icons, thumbs, article, medium, large, slideshow or all. 
 # If size_name is omitted, the default size set by variables _width and _height is used.
 #
 # The resize option passed to the convert command is currently the best option for the intended purpose. This preserves the original proportions of the original and ensures that the resized image fits entirely within a frame of the requested size. A web site design that uses frames the same size as these preset sizes will allow the browser to render the images without it having to calculate any image scaling. This can be an advantage on bandwidth- or power-limited platforms.
@@ -24,6 +24,8 @@ CONVERTFLAGS=-resize
 
 _width=70
 _height=50
+icons_width=24
+icons_height=24
 thumbs_width=83
 thumbs_height=55
 article_width=320
@@ -35,7 +37,7 @@ large_height=1200
 slideshow_width=760
 slideshow_height=280
 
-image_size=thumbs article medium large slideshow
+image_size=icons thumbs article medium large slideshow
 
 .PHONY : all $(image_size) 
 
@@ -46,10 +48,11 @@ all:$(image_size)
 # The filter at the end of thhe pre-requisutes construction could do with being more generic.
 # This wold mean the targets for the conversion are extension-specific and a catch-all rule at the end will be required.
 $(image_size):$$(patsubst originals/%,$$@/%,$$(wildcard originals/*.jpg))
+$(image_size):$$(patsubst originals/%,$$@/%,$$(wildcard originals/*.png))
 
 #Definitely can not generate originals from anything else so make this bit a final rule (double colon).
 #There is the potential for programmatically generated images but that's not today's requirement.
-%.jpg:: originals/$$(@F)
+%.jpg %.png:: originals/$$(@F)
 	$(CONVERT) $^ $(CONVERTFLAGS) $($(@D)_width)x$($(@D)_height) $@
 #	$(CONVERT) $(subst /,\\,$^) $(CONVERTFLAGS) $($(@D)_width)x$($(@D)_height) $(subst /,\\,$@)
 
