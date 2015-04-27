@@ -12,6 +12,7 @@
 @import url("global-forms.css");
 @import url("http://fonts.googleapis.com/css?family=Tangerine");
 @import url("http://fonts.googleapis.com/css?family=Artifika");
+@import url("http://fonts.googleapis.com/css?family=Josefin Sans");
 
 /***** Global *****/
 /* Body */
@@ -21,7 +22,7 @@
 		background-position: top center;
 		color: #000305;
 		font-size: 100%; /* Base font size: 14px */
-		font-family: 'Artifika', 'PT Sans', 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+		font-family: 'Josefin Sans', 'PT Sans', 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 		line-height: 1.429;
 		margin: 0;
 		padding: 0;
