@@ -27,9 +27,9 @@ LIVE_URL:
 
 #Limit what we're interested in. 
 SUB_PATHS:=css images js
-FILE_TYPES:=html css jpg js
-FILE_SPECS:=*.html css/*.css images/*.jpg js/*.js
-file_filter=find $< \( -name *.jpg -o -name *.html -o -name *.js -o -name *.css \) -printf "%P\n"
+FILE_TYPES:=html css jpg js png svg
+FILE_SPECS:=*.html css/*.css images/*.jpg images/*.png images/*.svg js/*.js
+file_filter=find $< \( -name *.jpg -o -name *.png -o -name *.svg -o -name *.html -o -name *.js -o -name *.css \) -printf "%P\n"
 RSYNCFLAGS:=--verbose --times --progress --stats  --files-from=-
 #WPUTDEBUGFLAGS:=--verbose --verbose --output-file=wput-log
 WPUTDEBUGFLAGS:=
