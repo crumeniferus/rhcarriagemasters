@@ -12,10 +12,10 @@ dormant: $(addprefix complete-, $(ACTIVE-STRATS))
 
 complete-%:
 	$(info Strategy '$*': Moving all cases from 'done' silo to '$(DORMANT-STRAT)' strategy.)
-	@if [ "$(find $*/done/ -maxdepth 1 -type f ! -name '.*' -printf '%P')" == "" ]; then \
+	if [ "`find $*/done/ -maxdepth 1 -type f ! -name '.*' -printf '%P'`" == "" ]; then \
 		echo "No cases in 'done' silo."; \
 	else \
-		@mv $*/done/* $(DORMANT-STRAT)/inputs; \
+		mv $*/done/* $(DORMANT-STRAT)/inputs; \
 	fi
 
 new-strategy: NEWSTRAT?="$(shell read newstrat && echo $$newstrat)"
