@@ -34,7 +34,7 @@
 
 				<li><article class="hentry">
 					<header>
-						<h2 class="entry-title"><a href="#" rel="bookmark" title="Permalink to this POST TITLE">Facebook page coming soon.</a></h2>
+						<h2 class="entry-title"><a href="#" rel="bookmark" title="Permalink to this POST TITLE">Google+ page coming soon.</a></h2>
 				  </header>
 
 					<footer class="post-info">
@@ -49,7 +49,7 @@
 
 					<div class="entry-content">
 
-						<p>We are pleased to announce the upcoming launch of the crum4_social_link_long(`Facebook',`facebook'). As we have more photographs to share, they will appear on our crum4_social_link_short(`Facebook',`facebook') page first and then added later to the gallery page of this web site.</p>
+						<p>We are pleased to announce the upcoming launch of the crum4_social_link_long(`Google+',`googleplus'). As we have more photographs to share, they will appear on our crum4_social_link_short(`Google+',`googleplus') page first and then added later to the gallery page of this web site.</p>
 					</div><!-- /.entry-content -->
 				</article></li>
 
