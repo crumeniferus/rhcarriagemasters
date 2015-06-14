@@ -3,3 +3,5 @@ saabfleet03.png:Saab Fleet on Parade
 saabfleet04.png:Saab Fleet on Parade
 saabfleet05.png:Saab Fleet on Parade
 saabfleet07.png:Saab Fleet on Parade
+IMG_0602.png:Silver Limousine Dream
+IMG_0603.png:Silver Limousine at Home
