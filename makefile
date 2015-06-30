@@ -39,10 +39,10 @@ FILE_SPECS:=*.html css/*.css images/*.jpg images/*.png images/*.svg js/*.js
 file_filter=find $< \( -name *.jpg -o -name *.png -o -name *.svg -o -name *.html -o -name *.js -o -name *.css \) -printf "%P\n"
 
 RSYNCFLAGS_GENERAL:=--recursive --verbose --times --progress --stats
-RSYNCFLAGS_FULLCOPY:=$(RSYNCFLAGS_GENERAL)
-RSYNCFLAGS_SELECTIVE:=$(RSYNCFLAGS_GENERAL) --files-from=-
-#RSYNCDEBUGFLAGS:=--dry-run
-RSYNCDEBUGFLAGS:=
+RSYNCFLAGS_MIRROR:=--ignore-times --delete
+RSYNCFLAGS_SELECTIVE:=--files-from=-
+#RSYNCFLAGS_DEBUG:=--dry-run
+RSYNCFLAGS_DEBUG:=
 
 #WPUTDEBUGFLAGS:=--verbose --verbose --output-file=wput-log
 WPUTDEBUGFLAGS:=
@@ -60,13 +60,13 @@ build : FORCE
 	cd build && $(MAKE)
 
 site : build
-	$(file_filter) | rsync $(RSYNCFLAGS_SELECTIVE) ./$< ./$@
+	$(file_filter) | rsync $(RSYNCFLAGS_DEBUG) $(RSYNCFLAGS_GENERAL) $(RSYNCFLAGS_MIRROR) $(RSYNCFLAGS_SELECTIVE) ./$< ./$@
 
 upload-beta : UPLOAD_DEST=$(BETA_URL)
 upload-beta : wput-upload
 
 upload-live : UPLOAD_DEST=$(LIVE_URL)
-upload-live : RSYNCFLAGS=$(RSYNCFLAGS_FULLCOPY)
+upload-live : RSYNCFLAGS=$(RSYNCFLAGS_GENERAL) $(RSYNCFLAGS_MIRROR)
 upload-live : rsync-upload
 
 wput-upload : site
@@ -81,4 +81,4 @@ wput-upload : site
 	wput $(WPUTDEBUGFLAGS) $(WPUTFLAGS) --basename=./site/ ./site $(UPLOAD_DEST) || (if [ $$? = 1 ]; then exit 0; fi)
 
 rsync-upload : site
-	rsync $(RSYNCDEBUGFLAGS) $(RSYNCFLAGS) ./site/ $(UPLOAD_DEST)
+	rsync $(RSYNCFLAGS_DEBUG) $(RSYNCFLAGS) ./site/ $(UPLOAD_DEST)
