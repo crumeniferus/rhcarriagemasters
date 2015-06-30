@@ -23,14 +23,18 @@
 
 STAGE_NAMES:=devel beta live
 BETA_URL=ftp://b6_14967648:C43353M315T3R@ftp.byethost6.com/rhfs.byethost6.com/htdocs/
-LIVE_URL=ftp://rhfuneralservices@crumeniferus.co.uk:C4335y81t5@ftp.crumeniferus.co.uk/
+LIVE_URL=crumeniferus@crumeniferus.co.uk:public_html/rhfuneralservices.co.uk/
 
 #Limit what we're interested in. 
 SUB_PATHS:=css images js
 FILE_TYPES:=html css jpg js png svg
 FILE_SPECS:=*.html css/*.css images/*.jpg images/*.png images/*.svg js/*.js
 file_filter=find $< \( -name *.jpg -o -name *.png -o -name *.svg -o -name *.html -o -name *.js -o -name *.css \) -printf "%P\n"
-RSYNCFLAGS:=--verbose --times --progress --stats  --files-from=-
+RSYNCFLAGS_GENERAL:=--recursive --verbose --times --progress --stats
+RSYNCFLAGS_FULLCOPY:=$(RSYNCFLAGS_GENERAL)
+RSYNCFLAGS_SELECTIVE:=$(RSYNCFLAGS_GENERAL) --files-from=-
+#RSYNCDEBUGFLAGS:=--dry-run
+RSYNCDEBUGFLAGS:=
 #WPUTDEBUGFLAGS:=--verbose --verbose --output-file=wput-log
 WPUTDEBUGFLAGS:=
 WPUTFLAGS:=--timestamp --reupload
@@ -47,15 +51,16 @@ build : FORCE
 	cd build && $(MAKE)
 
 site : build
-	$(file_filter) | rsync $(RSYNCFLAGS) ./$< ./$@
+	$(file_filter) | rsync $(RSYNCFLAGS_SELECTIVE) ./$< ./$@
 
 upload-beta : UPLOAD_DEST=$(BETA_URL)
-upload-beta : upload
+upload-beta : wput-upload
 
 upload-live : UPLOAD_DEST=$(LIVE_URL)
-upload-live : upload
+upload-live : RSYNCFLAGS=$(RSYNCFLAGS_FULLCOPY)
+upload-live : rsync-upload
 
-upload : site
+wput-upload : site
 	#wput returns a few different status values:
 	# 0 - All okay or nothing to do.
 	# 1 - Some files skipped due to size or timestamp checks that decided no transmission was required.
@@ -65,6 +70,9 @@ upload : site
 	#For our purposes, exit values 0 and 1 are a success but make considers only 0 to be a success.
 	#No additional warning messages are needed on top of those already supplied by wput.
 	wput $(WPUTDEBUGFLAGS) $(WPUTFLAGS) --basename=./site/ ./site $(UPLOAD_DEST) || (if [ $$? = 1 ]; then exit 0; fi)
+
+rsync-upload : site
+	rsync $(RSYNCDEBUGFLAGS) $(RSYNCFLAGS) ./site/ $(UPLOAD_DEST)
 
 #$(filter-out build, $(DEV_STAGE_NAMES)):
 	#$(local_upstage)
