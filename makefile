@@ -23,7 +23,7 @@
 
 STAGE_NAMES:=devel beta live
 BETA_URL=ftp://b6_14967648:C43353M315T3R@ftp.byethost6.com/rhfs.byethost6.com/htdocs/
-LIVE_URL:
+LIVE_URL=ftp://rhfuneralservices@crumeniferus.co.uk:C4335y81t5@ftp.crumeniferus.co.uk/
 
 #Limit what we're interested in. 
 SUB_PATHS:=css images js
@@ -66,6 +66,6 @@ upload : site
 	#No additional warning messages are needed on top of those already supplied by wput.
 	wput $(WPUTDEBUGFLAGS) $(WPUTFLAGS) --basename=./site/ ./site $(UPLOAD_DEST) || (if [ $$? = 1 ]; then exit 0; fi)
 
-$(filter-out build, $(DEV_STAGE_NAMES)):
-	$(local_upstage)
+#$(filter-out build, $(DEV_STAGE_NAMES)):
+	#$(local_upstage)
 	
