@@ -2,14 +2,13 @@
 
 ###
 #
-# Note that this is in transition from an old scheme that used different directories to reperesent the progression of a project.
-# The new scheme is in progress: it makes much more sense to use the branching facilities of Git or different release stages.
-# New plan is that there is a "site" folder which contains only the deliverables and not all the macros and text files. 
-# For now, the build directory also contains all of those, just because of a lack of mental clarity.
+# The scheme is to use the branching facilities of Git for different release stages.
+# There is a "site" folder which contains only the deliverables, excluding the macros and text files. 
+# For now, the "build" directory contains everything mingled, just because of a lack of mental clarity.
 #
 ###
 
-#Progression is:
+#Progression of release is:
 #  devel->beta->live
 #Each stage must be obtained using checkout from Git.
 #The user must know which stage is currently checked out and use the correct input to make, otherwise you end up with the wrong deliverables.
@@ -21,6 +20,14 @@
 # Copy from build to site	Done
 # Upload to server		Done
 
+# Process within each stage is:
+#   make build - derive HTML files from sources.
+#   make site  - filter out the deliverables into one place.
+# Usually, once 'make build' and 'make site' are run for devel, there is no need to run them again on downstream stages.
+# Also, the target "build" is a pre-requisite of target "site", which in turn is a pre-requisite of all the uploading targets. This should ensure that the uploaded files really are the result of the present source files.
+
+# Uploading to beta could be better but uploading to live depends on having an approved SSH key on the server.
+
 STAGE_NAMES:=devel beta live
 BETA_URL=ftp://b6_14967648:C43353M315T3R@ftp.byethost6.com/rhfs.byethost6.com/htdocs/
 LIVE_URL=crumeniferus@crumeniferus.co.uk:public_html/rhfuneralservices.co.uk/
@@ -30,11 +37,13 @@ SUB_PATHS:=css images js
 FILE_TYPES:=html css jpg js png svg
 FILE_SPECS:=*.html css/*.css images/*.jpg images/*.png images/*.svg js/*.js
 file_filter=find $< \( -name *.jpg -o -name *.png -o -name *.svg -o -name *.html -o -name *.js -o -name *.css \) -printf "%P\n"
+
 RSYNCFLAGS_GENERAL:=--recursive --verbose --times --progress --stats
 RSYNCFLAGS_FULLCOPY:=$(RSYNCFLAGS_GENERAL)
 RSYNCFLAGS_SELECTIVE:=$(RSYNCFLAGS_GENERAL) --files-from=-
 #RSYNCDEBUGFLAGS:=--dry-run
 RSYNCDEBUGFLAGS:=
+
 #WPUTDEBUGFLAGS:=--verbose --verbose --output-file=wput-log
 WPUTDEBUGFLAGS:=
 WPUTFLAGS:=--timestamp --reupload
@@ -73,7 +82,3 @@ wput-upload : site
 
 rsync-upload : site
 	rsync $(RSYNCDEBUGFLAGS) $(RSYNCFLAGS) ./site/ $(UPLOAD_DEST)
-
-#$(filter-out build, $(DEV_STAGE_NAMES)):
-	#$(local_upstage)
-	
